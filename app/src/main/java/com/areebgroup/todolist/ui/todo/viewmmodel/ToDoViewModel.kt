@@ -62,9 +62,7 @@ class ToDoViewModel @Inject constructor(
     }
 
     private suspend fun loadTodoList() {
-        getAllTodoTasksUseCase.invoke().catch { e ->
-            Log.e("TAG", "Error loading tasks: ${e.message}")
-        }.collect { tasks ->
+        getAllTodoTasksUseCase.invoke().collect { tasks ->
             _state.value = ToDoList(todoList = tasks)
         }
     }
