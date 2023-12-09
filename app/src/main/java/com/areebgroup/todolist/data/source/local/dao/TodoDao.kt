@@ -26,7 +26,3 @@ interface TodoDao {
     @Query("DELETE FROM todo_list WHERE id = :id")
     suspend fun deleteTask(id: Int)
 }
-
-
-//    @Query("UPDATE todo_list SET taskTitle = :newTaskTitle, taskDescription = :newTaskDescription WHERE id = :id")
-//    suspend fun updateTask(id: Int, newTaskTitle: String, newTaskDescription: String)
