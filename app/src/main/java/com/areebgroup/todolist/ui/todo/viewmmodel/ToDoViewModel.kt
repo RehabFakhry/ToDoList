@@ -77,7 +77,7 @@ class ToDoViewModel @Inject constructor(
     private suspend fun updateTask(updatedTask: TodoItem) {
         val updatedTodoList = updateTaskUseCase(_state.value.todoList, updatedTask)
         _state.value = _state.value.copy(todoList = updatedTodoList)
-        _toastMessage.value = "Task updated successfully!"
+//        _toastMessage.value = "Task updated successfully!"
     }
 
     private suspend fun deleteTask(id: Int) {

@@ -87,7 +87,7 @@ fun TaskDialog(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.icon_image),
+                    painter = painterResource(id = R.drawable.app_icon),
                     contentDescription = null,
                     modifier = Modifier.background(Color.Transparent).size(48.dp)
                 )
