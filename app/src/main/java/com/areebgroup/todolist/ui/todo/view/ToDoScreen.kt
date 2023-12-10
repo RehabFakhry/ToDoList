@@ -77,8 +77,9 @@ fun HomeScreen(
         onClickAddTask = {
             viewModel.processIntent(ToDoIntent.AddTask(it))
         },
-        onClickUpdate = {
-            viewModel.processIntent(ToDoIntent.UpdateTask(it))
+        onClickUpdate = { todoItem, onClick ->
+            viewModel.processIntent(ToDoIntent.UpdateTask(todoItem))
+            onClick()
         },
         onClickDelete = {
             viewModel.processIntent(ToDoIntent.DeleteTask(it))
@@ -94,7 +95,7 @@ fun HomeContent(
     todoViewModel: ToDoViewModel,
     onMarkCheckBox: (Int, Boolean) -> Unit,
     onClickDelete: (Int) -> Unit,
-    onClickUpdate: (updatedTask: TodoItem) -> Unit,
+    onClickUpdate: (updatedTask: TodoItem, onClick: () -> Unit) -> Unit,
     onClickAddTask: (newTask: TodoItem) -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
@@ -119,7 +120,12 @@ fun HomeContent(
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
         }
 
-        ContentSection(todolist, onMarkCheckBox, onClickDelete, onClickUpdate)
+        ContentSection(todolist, onMarkCheckBox, onClickDelete) { task ->
+            onClickUpdate(task)
+            {
+                isUpdateDialogVisible = true
+            }
+        }
 
         Dialogs(
             isDialogVisible = isDialogVisible,
@@ -131,8 +137,11 @@ fun HomeContent(
                 Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show()
             },
             onClickUpdateTask = { updatedTask ->
-                isUpdateDialogVisible = false
-                onClickUpdate(updatedTask)
+                onClickUpdate(
+                    updatedTask
+                ) {
+                    isUpdateDialogVisible = false
+                }
             },
             onCancelDialog = { isDialogVisible = false }
         )

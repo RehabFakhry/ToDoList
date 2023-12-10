@@ -47,7 +47,6 @@ fun Dialogs(
             onClickCancel = onCancelDialog
         )
     }
-
     if (isUpdateDialogVisible) {
         TaskDialog(
             todoTask = todolist.todoItem,
