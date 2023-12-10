@@ -26,7 +26,7 @@ fun ContentSection(
     todolist: ToDoList,
     onMarkCheckBox: (Int, Boolean) -> Unit,
     onClickDelete: (Int) -> Unit,
-    onClickUpdate: (TodoItem) -> Unit
+    onClickUpdate: (todoItem: TodoItem) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -58,7 +58,11 @@ fun ContentSection(
         if (todolist.todoList.isEmpty()) {
             EmptyPlaceholder()
         } else {
-            TasksList(todolist.todoList, onMarkCheckBox, onClickUpdate, onClickDelete)
+            TasksList(todolist.todoList, onMarkCheckBox, {
+                todoItem ->
+                onClickUpdate(todoItem)
+            }
+                ,onClickDelete)
         }
     }
 }
