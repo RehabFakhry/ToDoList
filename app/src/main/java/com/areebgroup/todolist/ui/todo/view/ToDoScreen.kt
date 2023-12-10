@@ -2,37 +2,13 @@ package com.areebgroup.todolist.ui.todo.view
 
 import android.annotation.SuppressLint
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -41,22 +17,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.areebgroup.todolist.R
 import com.areebgroup.todolist.data.source.local.model.TodoItem
 import com.areebgroup.todolist.ui.theme.Pink40
-import com.areebgroup.todolist.ui.theme.white37
-import com.areebgroup.todolist.ui.theme.white87
 import com.areebgroup.todolist.ui.todo.intent.ToDoIntent
 import com.areebgroup.todolist.ui.todo.model.ToDoList
 import com.areebgroup.todolist.ui.todo.view.components.ContentSection
@@ -77,8 +42,9 @@ fun HomeScreen(
         onClickAddTask = {
             viewModel.processIntent(ToDoIntent.AddTask(it))
         },
-        onClickUpdate = {
-            viewModel.processIntent(ToDoIntent.UpdateTask(it))
+        onClickUpdate = { todoItem, onClick ->
+            viewModel.processIntent(ToDoIntent.UpdateTask(todoItem))
+            onClick()
         },
         onClickDelete = {
             viewModel.processIntent(ToDoIntent.DeleteTask(it))
@@ -94,7 +60,7 @@ fun HomeContent(
     todoViewModel: ToDoViewModel,
     onMarkCheckBox: (Int, Boolean) -> Unit,
     onClickDelete: (Int) -> Unit,
-    onClickUpdate: (updatedTask: TodoItem) -> Unit,
+    onClickUpdate: (updatedTask: TodoItem, onClick: () -> Unit) -> Unit,
     onClickAddTask: (newTask: TodoItem) -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
@@ -119,7 +85,12 @@ fun HomeContent(
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
         }
 
-        ContentSection(todolist, onMarkCheckBox, onClickDelete, onClickUpdate)
+        ContentSection(todolist, onMarkCheckBox, onClickDelete) { task ->
+            onClickUpdate(task)
+            {
+                isUpdateDialogVisible = true
+            }
+        }
 
         Dialogs(
             isDialogVisible = isDialogVisible,
@@ -131,10 +102,16 @@ fun HomeContent(
                 Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show()
             },
             onClickUpdateTask = { updatedTask ->
-                isUpdateDialogVisible = false
-                onClickUpdate(updatedTask)
+                onClickUpdate(
+                    updatedTask
+                ) {
+                    isUpdateDialogVisible = false
+                }
             },
-            onCancelDialog = { isDialogVisible = false }
+            onCancelDialog = {
+                isDialogVisible = false
+                isUpdateDialogVisible = false
+            }
         )
     }
 }

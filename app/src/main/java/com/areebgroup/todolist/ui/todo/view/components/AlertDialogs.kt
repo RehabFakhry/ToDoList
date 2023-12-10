@@ -1,13 +1,18 @@
 package com.areebgroup.todolist.ui.todo.view.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -17,8 +22,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -47,7 +54,6 @@ fun Dialogs(
             onClickCancel = onCancelDialog
         )
     }
-
     if (isUpdateDialogVisible) {
         TaskDialog(
             todoTask = todolist.todoItem,
@@ -75,7 +81,19 @@ fun TaskDialog(
 
     AlertDialog(
         onDismissRequest = { onClickCancel() },
-        title = { Text(text = dialogTitle, fontSize = 20.sp) },
+        title = {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.icon_image),
+                    contentDescription = null,
+                    modifier = Modifier.background(Color.Transparent).size(48.dp)
+                )
+                Text(text = dialogTitle, fontSize = 20.sp)
+            }
+        },
         text = {
             Column {
                 CustomTextField(
@@ -123,7 +141,7 @@ fun CustomTextField(
     TextField(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.surface),
+            .background(Color.Transparent),
         value = value,
         onValueChange = { onValueChange(it) },
         label = { Text(text = label, color = MaterialTheme.colorScheme.primary) },
@@ -132,7 +150,7 @@ fun CustomTextField(
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = MaterialTheme.colorScheme.primary,
             focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
         )
     )
 }
