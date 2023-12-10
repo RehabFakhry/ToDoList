@@ -72,6 +72,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // Splash
+    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
+
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
