@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -91,7 +90,9 @@ fun TaskDialog(
                 Image(
                     painter = painterResource(id = R.drawable.icon_image),
                     contentDescription = null,
-                    modifier = Modifier.background(Color.Transparent).size(48.dp)
+                    modifier = Modifier
+                        .background(Color.Transparent)
+                        .size(48.dp)
                 )
                 Text(text = dialogTitle, fontSize = 20.sp)
             }

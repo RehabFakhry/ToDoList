@@ -89,7 +89,6 @@ fun HomeContent(
             isDialogVisible = isDialogVisible,
             isUpdateDialogVisible = isUpdateDialogVisible,
             selectedTaskForUpdate = selectedTaskForUpdate,
-            isDialogVisible = isDialogVisible,
             todolist = todolist,
             onClickAddTask = { newTask ->
                 isDialogVisible = false
