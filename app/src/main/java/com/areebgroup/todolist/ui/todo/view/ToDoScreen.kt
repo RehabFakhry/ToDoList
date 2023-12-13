@@ -86,12 +86,15 @@ fun HomeContent(
         }
 
         Dialogs(
+            isDialogVisible = isDialogVisible,
             isUpdateDialogVisible = isUpdateDialogVisible,
             selectedTaskForUpdate = selectedTaskForUpdate,
             isDialogVisible = isDialogVisible,
             todolist = todolist,
             onClickAddTask = { newTask ->
+                isDialogVisible = false
                 onClickAddTask(newTask)
+                Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show()
             },
             onClickUpdate = { updatedTask ->
                 onClickUpdate(updatedTask)
