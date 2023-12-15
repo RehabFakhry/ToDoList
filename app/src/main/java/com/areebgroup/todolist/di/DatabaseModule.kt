@@ -3,7 +3,7 @@ package com.areebgroup.todolist.di
 import android.content.Context
 import androidx.room.Room
 import com.areebgroup.todolist.data.source.local.dao.TodoDao
-import com.areebgroup.todolist.data.source.local.TodoDatabase
+import com.areebgroup.todolist.data.source.local.dao.TodoDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

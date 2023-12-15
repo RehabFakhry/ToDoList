@@ -9,12 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -42,9 +37,8 @@ fun HomeScreen(
         onClickAddTask = {
             viewModel.processIntent(ToDoIntent.AddTask(it))
         },
-        onClickUpdate = { todoItem, onClick ->
-            viewModel.processIntent(ToDoIntent.UpdateTask(todoItem))
-            onClick()
+        onClickUpdate = {
+            viewModel.processIntent(ToDoIntent.UpdateTask(it))
         },
         onClickDelete = {
             viewModel.processIntent(ToDoIntent.DeleteTask(it))
@@ -60,11 +54,12 @@ fun HomeContent(
     todoViewModel: ToDoViewModel,
     onMarkCheckBox: (Int, Boolean) -> Unit,
     onClickDelete: (Int) -> Unit,
-    onClickUpdate: (updatedTask: TodoItem, onClick: () -> Unit) -> Unit,
+    onClickUpdate: (updatedTask: TodoItem) -> Unit,
     onClickAddTask: (newTask: TodoItem) -> Unit
 ) {
     var isDialogVisible by remember { mutableStateOf(false) }
     var isUpdateDialogVisible by remember { mutableStateOf(false) }
+    var selectedTaskForUpdate by remember { mutableStateOf<TodoItem?>(null) }
 
     val context = LocalContext.current
 
@@ -85,28 +80,23 @@ fun HomeContent(
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
         }
 
-        ContentSection(todolist, onMarkCheckBox, onClickDelete) { task ->
-            onClickUpdate(task)
-            {
-                isUpdateDialogVisible = true
-            }
+        ContentSection(todolist, onMarkCheckBox, onClickDelete) { updatedTask ->
+            selectedTaskForUpdate = updatedTask
+            isUpdateDialogVisible = true
         }
 
         Dialogs(
             isDialogVisible = isDialogVisible,
             isUpdateDialogVisible = isUpdateDialogVisible,
+            selectedTaskForUpdate = selectedTaskForUpdate,
             todolist = todolist,
             onClickAddTask = { newTask ->
                 isDialogVisible = false
                 onClickAddTask(newTask)
                 Toast.makeText(context, "Task added successfully", Toast.LENGTH_SHORT).show()
             },
-            onClickUpdateTask = { updatedTask ->
-                onClickUpdate(
-                    updatedTask
-                ) {
-                    isUpdateDialogVisible = false
-                }
+            onClickUpdate = { updatedTask ->
+                onClickUpdate(updatedTask)
             },
             onCancelDialog = {
                 isDialogVisible = false

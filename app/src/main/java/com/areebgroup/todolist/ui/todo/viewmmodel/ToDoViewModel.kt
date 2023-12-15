@@ -12,12 +12,14 @@ import com.areebgroup.todolist.domain.usecase.UpdateTaskUseCase
 import com.areebgroup.todolist.ui.todo.intent.ToDoIntent
 import com.areebgroup.todolist.ui.todo.model.ToDoList
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.xml.sax.ErrorHandler
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,7 +64,7 @@ class ToDoViewModel @Inject constructor(
     }
 
     private suspend fun loadTodoList() {
-        getAllTodoTasksUseCase.invoke().collect { tasks ->
+        getAllTodoTasksUseCase().collect { tasks ->
             _state.value = ToDoList(todoList = tasks)
         }
     }
@@ -70,7 +72,6 @@ class ToDoViewModel @Inject constructor(
     private suspend fun addTask(newTask: TodoItem) {
         addNewTaskUseCase(newTask)
         loadTodoList()
-
     }
 
     private suspend fun updateTask(updatedTask: TodoItem) {

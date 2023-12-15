@@ -8,6 +8,6 @@ import javax.inject.Inject
 class GetAllTodoListUseCase @Inject constructor(
     private val todoRepository: TodoRepository
 ) {
-    fun invoke(): Flow<List<TodoItem>> =
+    operator fun invoke(): Flow<List<TodoItem>> =
         todoRepository.getAllTodoTasks()
 }

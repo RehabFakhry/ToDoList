@@ -1,4 +1,4 @@
-package com.areebgroup.todolist.data.source.local
+package com.areebgroup.todolist.data.source.local.dao
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

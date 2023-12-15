@@ -12,7 +12,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -36,33 +35,35 @@ import com.areebgroup.todolist.ui.todo.model.ToDoList
 
 @Composable
 fun Dialogs(
-    isDialogVisible: Boolean,
     isUpdateDialogVisible: Boolean,
+    selectedTaskForUpdate: TodoItem?,
+    isDialogVisible: Boolean,
     todolist: ToDoList,
     onClickAddTask: (TodoItem) -> Unit,
-    onClickUpdateTask: (TodoItem) -> Unit,
+    onClickUpdate: (TodoItem) -> Unit,
     onCancelDialog: () -> Unit
 ) {
-    if (isDialogVisible) {
+    if (isUpdateDialogVisible && selectedTaskForUpdate != null) {
+        TaskDialog(
+            todoTask = selectedTaskForUpdate,
+            dialogTitle = stringResource(id = R.string.update_task),
+            confirmButton = stringResource(id = R.string.update),
+            onClickConfirm = { updatedTask ->
+                onClickUpdate(updatedTask)
+                onCancelDialog()
+            },
+            onClickCancel = onCancelDialog
+        )
+    } else if (isDialogVisible) {
         TaskDialog(
             dialogTitle = stringResource(id = R.string.add_new_task),
             confirmButton = stringResource(id = R.string.add),
             todoTask = todolist.todoItem,
             onClickConfirm = { newTask ->
                 onClickAddTask(newTask)
+                onCancelDialog()
             },
             onClickCancel = onCancelDialog
-        )
-    }
-    if (isUpdateDialogVisible) {
-        TaskDialog(
-            todoTask = todolist.todoItem,
-            dialogTitle = stringResource(id = R.string.update_task),
-            confirmButton = stringResource(id = R.string.update),
-            onClickConfirm = { updatedTask ->
-                onClickUpdateTask(updatedTask)
-            },
-            onClickCancel = { onCancelDialog() },
         )
     }
 }
@@ -89,7 +90,9 @@ fun TaskDialog(
                 Image(
                     painter = painterResource(id = R.drawable.icon_image),
                     contentDescription = null,
-                    modifier = Modifier.background(Color.Transparent).size(48.dp)
+                    modifier = Modifier
+                        .background(Color.Transparent)
+                        .size(48.dp)
                 )
                 Text(text = dialogTitle, fontSize = 20.sp)
             }
@@ -124,7 +127,9 @@ fun TaskDialog(
         },
         dismissButton = {
             Button(
-                onClick = { onClickCancel() }
+                onClick = {
+                    onClickCancel()
+                }
             ) { Text(stringResource(R.string.cancel)) }
         }
     )
