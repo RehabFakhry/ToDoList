@@ -22,12 +22,8 @@ class TodoRepositoryImp @Inject constructor(
     override suspend fun addTask(newTask: TodoItem) =
         todoDao.insertTask(newTask.copy(id = 0, status = false))
 
-    @OptIn(DelicateCoroutinesApi::class)
-    override suspend fun updateTask(updatedTask: TodoItem) {
-        GlobalScope.launch(Dispatchers.IO){
+    override suspend fun updateTask(updatedTask: TodoItem) =
             todoDao.updateTask(updatedTask)
-        }
-    }
 
     override suspend fun deleteTask(id: Int) =
         todoDao.deleteTask(id)

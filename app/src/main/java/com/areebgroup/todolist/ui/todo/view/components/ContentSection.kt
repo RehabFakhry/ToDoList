@@ -40,7 +40,7 @@ fun ContentSection(
                 modifier = Modifier
                     .padding(start = 8.dp)
                     .size(70.dp),
-                painter = painterResource(id = R.drawable.app_icon),
+                painter = painterResource(id = R.drawable.icon_image),
                 contentDescription = "App icon"
             )
 
