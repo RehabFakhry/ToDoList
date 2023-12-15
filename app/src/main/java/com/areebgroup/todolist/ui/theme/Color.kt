@@ -11,6 +11,7 @@ val white37 = Color(0x5EFFFFFF)
 
 val black37 = Color(0xFFA0A0A0)
 val black87 = Color(0xDE121212)
+val darkBackground = Color(0xFF0C0C0C)
 
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF9558A7)

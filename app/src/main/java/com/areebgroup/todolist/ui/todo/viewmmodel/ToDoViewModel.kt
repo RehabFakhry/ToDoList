@@ -1,6 +1,5 @@
 package com.areebgroup.todolist.ui.todo.viewmmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.areebgroup.todolist.data.source.local.model.TodoItem
@@ -9,17 +8,14 @@ import com.areebgroup.todolist.domain.usecase.DeleteTaskUseCase
 import com.areebgroup.todolist.domain.usecase.GetAllTodoListUseCase
 import com.areebgroup.todolist.domain.usecase.MarkTaskCompletedUseCase
 import com.areebgroup.todolist.domain.usecase.UpdateTaskUseCase
-import com.areebgroup.todolist.ui.todo.intent.ToDoIntent
+import com.areebgroup.todolist.ui.todo.view.ToDoIntent
 import com.areebgroup.todolist.ui.todo.model.ToDoList
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.xml.sax.ErrorHandler
 import javax.inject.Inject
 
 @HiltViewModel
@@ -77,7 +73,6 @@ class ToDoViewModel @Inject constructor(
     private suspend fun updateTask(updatedTask: TodoItem) {
         val updatedTodoList = updateTaskUseCase(_state.value.todoList, updatedTask)
         _state.value = _state.value.copy(todoList = updatedTodoList)
-//        _toastMessage.value = "Task updated successfully!"
     }
 
     private suspend fun deleteTask(id: Int) {
