@@ -111,7 +111,11 @@ fun ToDoList(
                 .clickable { expandedMenu = !expandedMenu },
             contentAlignment = Alignment.CenterEnd,
         ) {
-            Icon(imageVector = Icons.Default.MoreVert, contentDescription = "Options")
+            Icon(
+                imageVector = Icons.Default.MoreVert,
+                contentDescription = "Options",
+                tint = Color.White
+            )
 
             DropdownMenu(
                 expanded = expandedMenu,

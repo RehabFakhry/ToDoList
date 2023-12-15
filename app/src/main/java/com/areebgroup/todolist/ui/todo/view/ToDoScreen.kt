@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.areebgroup.todolist.data.source.local.model.TodoItem
 import com.areebgroup.todolist.ui.theme.Pink40
-import com.areebgroup.todolist.ui.todo.intent.ToDoIntent
 import com.areebgroup.todolist.ui.todo.model.ToDoList
 import com.areebgroup.todolist.ui.todo.view.components.ContentSection
 import com.areebgroup.todolist.ui.todo.view.components.Dialogs
@@ -79,7 +78,11 @@ fun HomeContent(
             Icon(imageVector = Icons.Default.Add, contentDescription = null)
         }
 
-        ContentSection(todolist, onMarkCheckBox, onClickDelete) { updatedTask ->
+        ContentSection(
+            todolist,
+            onMarkCheckBox,
+            onClickDelete
+        ) { updatedTask ->
             selectedTaskForUpdate = updatedTask
             isUpdateDialogVisible = true
         }

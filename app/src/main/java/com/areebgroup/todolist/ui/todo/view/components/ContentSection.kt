@@ -41,7 +41,7 @@ fun ContentSection(
                     .padding(start = 8.dp)
                     .size(70.dp),
                 painter = painterResource(id = R.drawable.icon_image),
-                contentDescription = "App icon"
+                contentDescription = stringResource(R.string.app_icon)
             )
 
             Text(
@@ -58,7 +58,10 @@ fun ContentSection(
         if (todolist.todoList.isEmpty()) {
             EmptyPlaceholder()
         } else {
-            TasksList(todolist.todoList, onMarkCheckBox, {
+            TasksList(
+                todolist.todoList,
+                onMarkCheckBox,
+                {
                 todoItem ->
                 onClickUpdate(todoItem)
             }

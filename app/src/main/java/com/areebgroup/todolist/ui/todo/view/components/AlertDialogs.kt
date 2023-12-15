@@ -1,6 +1,6 @@
 package com.areebgroup.todolist.ui.todo.view.components
 
-import androidx.compose.foundation.Image
+import  androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.areebgroup.todolist.R
@@ -150,7 +149,6 @@ fun CustomTextField(
         value = value,
         onValueChange = { onValueChange(it) },
         label = { Text(text = label, color = MaterialTheme.colorScheme.primary) },
-        textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurface),
         shape = RoundedCornerShape(8.dp),
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = MaterialTheme.colorScheme.primary,
