@@ -2,6 +2,7 @@ package com.areebgroup.todolist.ui.todo.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,16 +22,19 @@ import com.areebgroup.todolist.ui.theme.white87
 @Composable
 fun EmptyPlaceholder() {
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(2.dp)
     ) {
         Image(
-            modifier = Modifier.size(400.dp).padding(top = 32.dp),
+            modifier = Modifier
+                .size(400.dp)
+                .padding(top = 32.dp),
             painter = painterResource(id = R.drawable.empty_placeholder),
             contentDescription = stringResource(R.string.placeholder_image),
             contentScale = ContentScale.Crop
         )
-
         Text(
             modifier = Modifier,
             text = stringResource(R.string.placeholder_text),

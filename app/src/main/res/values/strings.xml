@@ -11,6 +11,6 @@
     <string name="update_task">Update Task</string>
     <string name="update">Update</string>
     <string name="placeholder_image">Placeholder Image</string>
-    <string name="placeholder_text">Your to-do list is empty. Time to fill it with meaningful tasks!</string>
+    <string name="placeholder_text">Well Done! Your to-do list is empty. Time to fill it with meaningful tasks!</string>
     <string name="app_icon">App icon</string>
 </resources>

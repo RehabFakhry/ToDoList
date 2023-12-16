@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.areebgroup.todolist.data.source.local.model.TodoItem
 import com.areebgroup.todolist.ui.theme.Pink40
+import com.areebgroup.todolist.ui.theme.white87
 import com.areebgroup.todolist.ui.todo.model.ToDoList
 import com.areebgroup.todolist.ui.todo.view.components.ContentSection
 import com.areebgroup.todolist.ui.todo.view.components.Dialogs
@@ -71,6 +72,7 @@ fun HomeContent(
         FloatingActionButton(
             onClick = { isDialogVisible = true },
             containerColor = Pink40,
+            contentColor = white87,
             modifier = Modifier
                 .size(70.dp)
                 .padding(bottom = 16.dp, end = 16.dp)
