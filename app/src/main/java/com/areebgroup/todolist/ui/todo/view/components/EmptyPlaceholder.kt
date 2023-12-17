@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -24,19 +25,21 @@ fun EmptyPlaceholder() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(2.dp)
+            .padding(16.dp).padding(top = 56.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            modifier = Modifier
-                .size(400.dp)
-                .padding(top = 32.dp),
-            painter = painterResource(id = R.drawable.empty_placeholder),
-            contentDescription = stringResource(R.string.placeholder_image),
-            contentScale = ContentScale.Crop
-        )
+        Box(modifier = Modifier
+            .size(200.dp, 250.dp),
+            contentAlignment = Alignment.Center) {
+            Image(
+                modifier = Modifier.fillMaxSize(),
+                painter = painterResource(id = R.drawable.empty_placeholder),
+                contentDescription = stringResource(R.string.placeholder_image),
+                contentScale = ContentScale.Crop
+            )
+        }
         Text(
-            modifier = Modifier,
+            modifier = Modifier.padding(top = 24.dp),
             text = stringResource(R.string.placeholder_text),
             textAlign = TextAlign.Center,
             fontSize = 14.sp,
