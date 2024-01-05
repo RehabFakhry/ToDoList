@@ -1,7 +1,6 @@
 package com.areebgroup.todolist.ui.todo.view.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +28,7 @@ fun EmptyPlaceholder() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(modifier = Modifier
-            .size(200.dp, 250.dp),
+            .size(150.dp, 250.dp),
             contentAlignment = Alignment.Center) {
             Image(
                 modifier = Modifier.fillMaxSize(),

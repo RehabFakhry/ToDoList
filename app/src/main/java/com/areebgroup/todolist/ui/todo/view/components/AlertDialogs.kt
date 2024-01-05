@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -46,7 +47,7 @@ fun Dialogs(
         TaskDialog(
             todoTask = selectedTaskForUpdate,
             dialogTitle = stringResource(id = R.string.update_task),
-            confirmButton = stringResource(id = R.string.update),
+            confirmText = stringResource(id = R.string.update),
             onClickConfirm = { updatedTask ->
                 onClickUpdate(updatedTask)
                 onCancelDialog()
@@ -56,7 +57,7 @@ fun Dialogs(
     } else if (isDialogVisible) {
         TaskDialog(
             dialogTitle = stringResource(id = R.string.add_new_task),
-            confirmButton = stringResource(id = R.string.add),
+            confirmText = stringResource(id = R.string.add),
             todoTask = todolist.todoItem,
             onClickConfirm = { newTask ->
                 onClickAddTask(newTask)
@@ -67,12 +68,11 @@ fun Dialogs(
     }
 }
 
-
 @Composable
 fun TaskDialog(
     todoTask: TodoItem,
     dialogTitle: String,
-    confirmButton: String,
+    confirmText: String,
     onClickConfirm: (TodoItem) -> Unit,
     onClickCancel: () -> Unit,
 ) {
@@ -122,7 +122,7 @@ fun TaskDialog(
                     taskTitle = ""
                     taskDescription = ""
                 }
-            ) { Text(confirmButton) }
+            ) { Text(confirmText) }
         },
         dismissButton = {
             Button(
@@ -145,6 +145,7 @@ fun CustomTextField(
     TextField(
         modifier = modifier
             .fillMaxWidth()
+            .wrapContentHeight()
             .background(Color.Transparent),
         value = value,
         onValueChange = { onValueChange(it) },

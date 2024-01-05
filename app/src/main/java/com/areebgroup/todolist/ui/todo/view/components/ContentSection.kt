@@ -65,7 +65,8 @@ fun ContentSection(
                 todoItem ->
                 onClickUpdate(todoItem)
             }
-                ,onClickDelete)
+                ,onClickDelete
+            )
         }
     }
 }

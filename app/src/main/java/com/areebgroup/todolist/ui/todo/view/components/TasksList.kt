@@ -40,7 +40,7 @@ fun TasksList(
     onClickDelete: (Int) -> Unit
 ) {
     LazyColumn(
-        modifier = Modifier
+        modifier = Modifier.padding(bottom = 65.dp)
     ) {
         items(todoList.size) { index ->
             val todo = todoList[index]
