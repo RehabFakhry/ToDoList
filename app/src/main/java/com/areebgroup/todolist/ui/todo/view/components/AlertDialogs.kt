@@ -148,6 +148,7 @@ fun CustomTextField(
             .wrapContentHeight()
             .background(Color.Transparent),
         value = value,
+        singleLine = true,
         onValueChange = { onValueChange(it) },
         label = { Text(text = label, color = MaterialTheme.colorScheme.primary) },
         shape = RoundedCornerShape(8.dp),
